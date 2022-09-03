@@ -139,10 +139,10 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install setuptools wheel twine autopep8
+          python3 -m pip install setuptools wheel twine autopep8 build
       - name: Build package
         run: |
-          python3 setup.py sdist
+          python3 -m build
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
