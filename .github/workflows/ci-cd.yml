@@ -106,6 +106,20 @@ jobs:
         run: |
           python3 setup.py sdist
 
+  paths-filter:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.filter.outputs.modules }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          modules:
+            - 'base/**'
+            - 'operators/**'
+
   deploy:
     needs:
       - build-3-10
@@ -113,6 +127,7 @@ jobs:
       - build-3-8
       - build-3-7
       - build-3-6
+    if: needs.paths-filter.outputs.output1 == 'true'
 
     runs-on: ubuntu-latest
     steps:
