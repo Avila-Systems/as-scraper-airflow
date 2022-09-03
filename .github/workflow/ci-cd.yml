@@ -1,0 +1,67 @@
+name: Build, lint, test, and upload to PyPI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-3.10:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install setuptools wheel twine autopep8
+      - name: Lint with autopep8
+        run: |
+          python3 -m autopep8 -rd base/ operators/
+      - name: Build package
+        run: |
+          python3 setup.py sdist
+
+  build-3.9:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install setuptools wheel twine autopep8
+      - name: Lint with autopep8
+        run: |
+          python3 -m autopep8 -rd base/ operators/
+      - name: Build package
+        run: |
+          python3 setup.py sdist
+
+  build-3.8:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install setuptools wheel twine autopep8
+      - name: Lint with autopep8
+        run: |
+          python3 -m autopep8 -rd base/ operators/
+      - name: Build package
+        run: |
+          python3 setup.py sdist
