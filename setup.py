@@ -28,7 +28,7 @@ setup(
         include=['base', 'base.*', 'operators', 'operators.*'],
     ),
     install_requires=get_install_requires(),
-    python_requires=">=3.8",
+    python_requires=">=3.6",
     classifiers=[
         'Intended Audience :: Developers',
         'Programming Language :: Python',

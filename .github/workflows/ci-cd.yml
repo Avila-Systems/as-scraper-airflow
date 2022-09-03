@@ -105,3 +105,30 @@ jobs:
       - name: Build package
         run: |
           python3 setup.py sdist
+
+  deploy:
+    needs:
+      - build-3-10
+      - build-3-9
+      - build-3-8
+      - build-3-7
+      - build-3-6
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install setuptools wheel twine autopep8
+      - name: Build package
+        run: |
+          python3 setup.py sdist
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
