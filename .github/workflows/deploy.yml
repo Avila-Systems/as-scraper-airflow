@@ -21,7 +21,9 @@ jobs:
       - name: Build package
         run: |
           python3 -m build
-      - uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Publish to PyPI
+        run: |
+          python3 -m twine upload --repository as-airfow dist/* -u $user -p $password
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
