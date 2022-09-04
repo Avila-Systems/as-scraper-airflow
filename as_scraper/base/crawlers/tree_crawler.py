@@ -1,7 +1,6 @@
 from typing import List
 from bs4 import BeautifulSoup
-from base.crawlers import Crawler
-
+from as_scraper.base.crawlers import Crawler
 
 class TreeCrawler(Crawler):
     '''

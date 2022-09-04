@@ -7,9 +7,9 @@ from requests.adapters import HTTPAdapter
 from requests import Session
 import pandas as pd
 from tqdm import tqdm
-from base.errors import ScraperError
-from base.headers import HEADERS
-from base.exceptions import ThresholdException
+from as_scraper.base.errors import ScraperError
+from as_scraper.base.headers import HEADERS
+from as_scraper.base.exceptions import ThresholdException
 
 log = logging.getLogger(__name__)
 

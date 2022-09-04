@@ -4,9 +4,9 @@ from airflow.models.baseoperator import BaseOperator
 from airflow.utils.decorators import apply_defaults
 from airflow.exceptions import AirflowException
 import pandas as pd
-from base.crawlers.crawler import Crawler
-from base.errors import ScraperError
-from base.scraper import Scraper
+from as_scraper.base.crawlers.crawler import Crawler
+from as_scraper.base.errors import ScraperError
+from as_scraper.base.scraper import Scraper
 
 log = logging.getLogger(__name__)
 

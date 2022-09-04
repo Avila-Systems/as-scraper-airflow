@@ -5,8 +5,8 @@ from typing import Any, List, Optional
 import pandas as pd
 from airflow.providers.google.cloud.hooks.bigquery import BigQueryHook
 from google.cloud.bigquery import Client, LoadJobConfig
-from base.errors import ScraperError, TaskError
-from operators import ScraperOperator
+from as_scraper.base.errors import ScraperError, TaskError
+from as_scraper.operators import ScraperOperator
 
 log = logging.getLogger(__name__)
 
