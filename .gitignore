@@ -1,3 +1,4 @@
 .venv
 dist
 as_scraper.egg-info
+*.pyc
