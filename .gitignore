@@ -2,3 +2,4 @@
 dist
 as_scraper.egg-info
 *.pyc
+logs
