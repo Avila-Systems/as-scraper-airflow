@@ -1,4 +1,4 @@
-apache-airflow==2.2.3
+apache-airflow>=2.2.3
 apache-airflow-providers-google
 selenium
 bs4
