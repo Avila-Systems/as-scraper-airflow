@@ -8,7 +8,7 @@ def get_long_description():
 
 setup(
     name='as-scraper',
-    version='1.0.4',
+    version='1.0.5',
     description='Python library for scraping inside Airflow.',
     long_description=get_long_description(),
     long_description_content_type='text/markdown',
@@ -20,7 +20,7 @@ setup(
         'Issue Tracker': 'https://github.com/Avila-Systems/as-scraper/issues',
     },
     packages=find_packages(
-        include=['as-airflow*'],
+        include=['as-scraper*'],
     ),
     install_requires=[
         'apache-airflow==2.2.3',
