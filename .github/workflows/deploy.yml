@@ -7,13 +7,6 @@ on:
 
 jobs:
   deploy:
-    needs:
-      - build-3-10
-      - build-3-9
-      - build-3-8
-      - build-3-7
-      - build-3-6
-
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
