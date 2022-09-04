@@ -41,7 +41,7 @@ class ScraperToBigqueryOperator(ScraperOperator):
         *args,
         **kwargs,
     ) -> None:
-        super().__init__(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.destination_table = destination_table
         self.bigquery_conn_id = bigquery_conn_id
         self.schema = schema

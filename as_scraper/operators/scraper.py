@@ -1,7 +1,6 @@
 import logging
 from typing import Any, List, Optional, Type, Union
 from airflow.models.baseoperator import BaseOperator
-from airflow.utils.decorators import apply_defaults
 from airflow.exceptions import AirflowException
 import pandas as pd
 from as_scraper.base.crawlers.crawler import Crawler
@@ -38,7 +37,6 @@ class ScraperOperator(BaseOperator):
     ui_color: str = '#eb9319'
     ui_fgcolor: str = '#5c4b1f'
 
-    @apply_defaults
     def __init__(
         self,
         scraper_cls: Union[Type[Scraper], List[Type[Scraper]]],
@@ -51,7 +49,7 @@ class ScraperOperator(BaseOperator):
         *args,
         **kwargs,
     ):
-        super().__init__(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.scraper_cls = scraper_cls
         self.urls = urls
         self.crawler_cls = crawler_cls

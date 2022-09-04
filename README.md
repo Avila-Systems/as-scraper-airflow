@@ -1,4 +1,8 @@
 # as-scraper
+
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/as-scraper.svg)](https://pypi.org/project/as-scraper/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/as-scraper)](https://pypi.org/project/as-scraper/)
+
 Python library for scraping inside Airflow.
 
 # Installation
@@ -20,9 +24,39 @@ You can directly copy the `docker-compose.yml` file from [here](https://airflow.
 curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.3.4/docker-compose.yaml'
 ```
 
-### 2. Modify the `docker-compose.yml` file.
+### 2. Modify the `docker-compose.yml` file to use the `as-airflow` image.
 
-After that, simply go into the *docker-compose.yml* file and change the airflow image used:
+There are two ways of configuring the required docker image for this library.
+
+#### Option a. Create a Dockerfile that extends from the *almiavicas/as-airflow* image.
+
+To do this, simply go into the *docker-compose.yml* file, comment the `image` line and uncomment the `build` tag:
+
+```yaml
+...
+version: '3'
+x-airflow-common:
+  &airflow-common
+  # In order to add custom dependencies or upgrade provider packages you can use your extended image.
+  # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
+  # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
+  # image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.3.4}
+  build: .
+  ...
+```
+
+Then create your **Dockerfile** and copy and paste the following lines:
+
+```Dockerfile
+FROM almiavicas/as-airflow:2.2.3
+
+RUN pip install --no-cache-dir as-scraper
+
+```
+
+#### Option b. Modify the *docker-compose.yaml* to install the library.
+
+To do this, go to the *docker-compose.yml* file and make the following changes:
 
 ```yaml
 ...
@@ -33,7 +67,10 @@ x-airflow-common:
   # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
   # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
   image: ${AIRFLOW_IMAGE_NAME:-almiavicas/as-airflow:2.2.3}
-  ...
+  # build: .
+  environment:
+    ...
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-as-scraper}
 ```
 
 And that's it! You can now start using the as-scraper library.
@@ -62,7 +99,7 @@ Our output data will have two columns: `name` of the city and `url` which is lin
 
 So first we create a scraper that extends from the Scraper class, and define the `COLUMNS` variable to `['name', 'url']`.
 
-Create the *plugins/scrapers/yellow_pages.py* file and type the following code into it:
+Create the *plugins/scrapers/yellowpages.py* file and type the following code into it:
 
 ```python
 from as_scraper.base.scraper import Scraper
@@ -125,11 +162,42 @@ class YellowPagesScraper(Scraper):
 
 ### Creating the DAG.
 
-Now we want to create a DAG that will trigger the scraper. For that we will use the **ScraperToLogsOperator**
+Now we want to create a DAG that will trigger the scraper. For that we will use the **ScraperToLogsOperator**.
 
-Create the *dags/yellow_pages.py* file and copy the following content into it:
+As we mentioned before, the target url for our scraper is the https://www.yellowpages.com/sitemap. In the Dag definition file we will define the url that we want to scrape.
+
+> There are other ways of specifying urls based on a discovery strategy. However, for this example it's not required.
+
+Create the *dags/yellowpages.py* file and copy the following content into it:
 
 ```python
+from datetime import datetime, timedelta
+from airflow.models import DAG
+from plugins.scrapers.yellowpages import YellowPagesScraper
+from as_scraper.operators import ScraperToLogsOperator
 
+
+with DAG(
+    dag_id="yellow_pages",
+    catchup=False,
+    default_args={
+        'depends_on_past': False,
+        'email': ['airflow@example.com'],
+        'email_on_failure': False,
+        'email_on_retry': False,
+        'retries': 1,
+        'retry_delay': timedelta(minutes=5),
+    },
+    description="A simple Scraper DAG",
+    schedule_interval=timedelta(days=1),
+    start_date=datetime(2022, 8, 4),
+    catchup=False,
+) as dag:
+    t1 = ScraperToLogsOperator(
+        scraper_cls=YellowPagesScraper,
+        urls=['https://www.yellowpages.com/sitemap'],
+        task_id='scrape',
+        save_errors=True,
+    )
 
 ```
