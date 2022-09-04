@@ -24,6 +24,6 @@ jobs:
       - name: Publish to PyPI
         run: |
           python3 -m twine upload --repository as-airfow dist/* -u $user -p $password
-        with:
+        env:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
