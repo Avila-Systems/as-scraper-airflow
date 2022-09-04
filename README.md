@@ -201,3 +201,5 @@ with DAG(
     )
 
 ```
+
+And that's it! Head to the airflow webserver to run your DAG!

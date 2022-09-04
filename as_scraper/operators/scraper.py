@@ -68,7 +68,8 @@ class ScraperOperator(BaseOperator):
                 scraper_input, pd.DataFrame(crawled_urls))
         if self.urls is not None:
             input_urls = [{'url': url} for url in self.urls]
-            scraper_input = pd.concat(scraper_input, pd.DataFrame(input_urls))
+            inputs = scraper_input, pd.DataFrame(input_urls)
+            scraper_input = pd.concat(inputs, ignore_index=True)
         if not isinstance(self.scraper_cls, list):
             self.scraper_cls = [self.scraper_cls]
         # Algorithm to run multiple scraper classes one after each other.
