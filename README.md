@@ -99,7 +99,7 @@ Our output data will have two columns: `name` of the city and `url` which is lin
 
 So first we create a scraper that extends from the Scraper class, and define the `COLUMNS` variable to `['name', 'url']`.
 
-Create the *plugins/scrapers/yellowpages.py* file and type the following code into it:
+Create the *dags/scrapers/yellowpages.py* file and type the following code into it:
 
 ```python
 from as_scraper.base.scraper import Scraper
