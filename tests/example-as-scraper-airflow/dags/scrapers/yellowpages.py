@@ -2,7 +2,7 @@ from typing import Optional
 from selenium.webdriver import Firefox
 from selenium.webdriver.common.by import By
 import pandas as pd
-from as_scraper.base.scraper import Scraper
+from as_scraper.scraper import Scraper
 
 class YellowPagesScraper(Scraper):
     COLUMNS = ['name', 'url']

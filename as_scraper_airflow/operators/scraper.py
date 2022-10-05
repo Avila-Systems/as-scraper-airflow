@@ -3,9 +3,9 @@ from typing import Any, List, Optional, Type, Union
 from airflow.models.baseoperator import BaseOperator
 from airflow.exceptions import AirflowException
 import pandas as pd
-from as_scraper.base.crawlers.crawler import Crawler
-from as_scraper.base.errors import ScraperError
-from as_scraper.base.scraper import Scraper
+from as_scraper.crawlers.crawler import Crawler
+from as_scraper.errors import ScraperError
+from as_scraper.scraper import Scraper
 
 log = logging.getLogger(__name__)
 

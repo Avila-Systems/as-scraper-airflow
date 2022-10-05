@@ -1,4 +1,4 @@
-# as-scraper
+# as-scraper-airflow
 
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/as-scraper.svg)](https://pypi.org/project/as-scraper/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/as-scraper)](https://pypi.org/project/as-scraper/)
@@ -102,7 +102,7 @@ So first we create a scraper that extends from the Scraper class, and define the
 Create the *dags/scrapers/yellowpages.py* file and type the following code into it:
 
 ```python
-from as_scraper.base.scraper import Scraper
+from as_scraper.scraper import Scraper
 
 
 class YellowPagesScraper(Scraper):
@@ -117,7 +117,7 @@ Now, there are two execution options when running scrapers. We can either *load 
 For this example, let's go ahead and use the **Selenium** library. To configure this, simply add the following variable to your scraper:
 
 ```python
-from as_scraper.base.scraper import Scraper
+from as_scraper.scraper import Scraper
 
 
 class YellowPagesScraper(Scraper):
@@ -137,7 +137,7 @@ from typing import Optional
 from selenium.webdriver import Firefox
 from selenium.webdriver.common.by import By
 import pandas as pd
-from as_scraper.base.scraper import Scraper
+from as_scraper.scraper import Scraper
 
 
 class YellowPagesScraper(Scraper):
@@ -174,7 +174,7 @@ Create the *dags/yellowpages.py* file and copy the following content into it:
 from datetime import datetime, timedelta
 from airflow.models import DAG
 from scrapers.yellowpages import YellowPagesScraper
-from as_scraper.operators import ScraperToLogsOperator
+from as_scraper_airflow.operators import ScraperToLogsOperator
 
 
 with DAG(

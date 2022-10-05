@@ -7,30 +7,25 @@ def get_long_description():
 
 
 setup(
-    name='as-scraper',
-    version='1.2.3',
+    name='as-scraper-airflow',
+    version='1.0.0',
     description='Python library for scraping inside Airflow.',
     long_description=get_long_description(),
     long_description_content_type='text/markdown',
     author='Alvaro Avila',
     author_email='almiavicas@gmail.com',
-    url='https://github.com/Avila-Systems/as-scraper',
+    url='https://github.com/Avila-Systems/as-scraper-airflow',
     project_urls={
-        'Github Project': 'https://github.com/Avila-Systems/as-scraper',
-        'Issue Tracker': 'https://github.com/Avila-Systems/as-scraper/issues',
+        'Github Project': 'https://github.com/Avila-Systems/as-scraper-airflow',
+        'Issue Tracker': 'https://github.com/Avila-Systems/as-scraper-airflow/issues',
     },
     packages=find_packages(
-        include=['as_scraper*'],
+        include=['as_scraper_airflow*'],
     ),
     install_requires=[
         'apache-airflow>=2.2.3',
         'apache-airflow-providers-google',
-        'selenium',
-        'bs4',
-        'lxml',
-        'pandas',
-        'requests',
-        'tqdm',
+        'as-scraper',
     ],
     python_requires=">=3.6",
     classifiers=[
