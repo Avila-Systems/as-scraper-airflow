@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from airflow.models import DAG
 from scrapers.yellowpages import YellowPagesScraper
-from as_scraper.operators import ScraperToLogsOperator
+from as_scraper_airflow.operators import ScraperToLogsOperator
 
 
 with DAG(

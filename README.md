@@ -1,7 +1,7 @@
 # as-scraper-airflow
 
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/as-scraper.svg)](https://pypi.org/project/as-scraper/)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/as-scraper)](https://pypi.org/project/as-scraper/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/as-scraper-airflow.svg)](https://pypi.org/project/as-scraper-airflow/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/as-scraper-airflow)](https://pypi.org/project/as-scraper-airflow/)
 
 Python library for scraping inside Airflow.
 
@@ -50,7 +50,7 @@ Then create your **Dockerfile** and copy and paste the following lines:
 ```Dockerfile
 FROM almiavicas/as-airflow:2.2.3
 
-RUN pip install --no-cache-dir as-scraper
+RUN pip install --no-cache-dir as-scraper-airflow
 
 ```
 
@@ -70,7 +70,7 @@ x-airflow-common:
   # build: .
   environment:
     ...
-    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-as-scraper}
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-as-scraper-airflow}
 ```
 
 And that's it! You can now start using the as-scraper library.

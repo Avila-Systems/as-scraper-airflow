@@ -1,8 +1,8 @@
 import logging
 from typing import Any, List
 import pandas as pd
-from as_scraper.base.errors import ScraperError
-from as_scraper.operators.scraper import ScraperOperator
+from as_scraper_airflow.errors import ScraperError
+from as_scraper_airflow.operators.scraper import ScraperOperator
 
 log = logging.getLogger(__name__)
 
