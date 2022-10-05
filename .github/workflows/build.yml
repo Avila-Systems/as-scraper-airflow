@@ -39,7 +39,7 @@ jobs:
           python3 -m pip install setuptools wheel twine autopep8 build
       - name: Lint with autopep8
         run: |
-          python3 -m autopep8 -rd as_scraper/
+          python3 -m autopep8 -rd as_scraper_airflow/
       - name: Build package
         run: |
           python3 -m build
@@ -59,7 +59,7 @@ jobs:
           python3 -m pip install setuptools wheel twine autopep8 build
       - name: Lint with autopep8
         run: |
-          python3 -m autopep8 -rd as_scraper/
+          python3 -m autopep8 -rd as_scraper_airflow/
       - name: Build package
         run: |
           python3 -m build
@@ -79,7 +79,7 @@ jobs:
           python3 -m pip install setuptools wheel twine autopep8 build
       - name: Lint with autopep8
         run: |
-          python3 -m autopep8 -rd as_scraper/
+          python3 -m autopep8 -rd as_scraper_airflow/
       - name: Build package
         run: |
           python3 -m build
@@ -99,7 +99,7 @@ jobs:
           python3 -m pip install setuptools wheel twine autopep8 build
       - name: Lint with autopep8
         run: |
-          python3 -m autopep8 -rd as_scraper/
+          python3 -m autopep8 -rd as_scraper_airflow/
       - name: Build package
         run: |
           python3 -m build
