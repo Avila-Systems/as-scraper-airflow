@@ -173,7 +173,7 @@ Create the *dags/yellowpages.py* file and copy the following content into it:
 ```python
 from datetime import datetime, timedelta
 from airflow.models import DAG
-from plugins.scrapers.yellowpages import YellowPagesScraper
+from scrapers.yellowpages import YellowPagesScraper
 from as_scraper.operators import ScraperToLogsOperator
 
 
