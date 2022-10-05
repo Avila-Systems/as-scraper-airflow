@@ -8,7 +8,7 @@ def get_long_description():
 
 setup(
     name='as-scraper-airflow',
-    version='1.1.0',
+    version='1.2.0',
     description='Python library for scraping inside Airflow.',
     long_description=get_long_description(),
     long_description_content_type='text/markdown',
